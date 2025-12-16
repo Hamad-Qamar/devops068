@@ -23,16 +23,16 @@ jobs:
 
     - name: Build Backend Image
       run: |
-        docker build -t hammadqamar913@gmail.com/devops-backend ./backend
+        docker build -t hamadqamar/devops-backend ./backend
 
     - name: Build Frontend Image
       run: |
-        docker build -t hammadqamar913@gmail.com/devops-frontend ./frontend
+        docker build -t hamadqamar/devops-frontend ./frontend
 
     - name: Push Backend Image
       run: |
-        docker push hammadqamar913@gmail.com/devops-backend
+        docker push hamadqamar/devops-backend
 
     - name: Push Frontend Image
       run: |
-        docker push hammadqamar913@gmail.com/devops-frontend
+        docker push hamadqamar/devops-frontend
