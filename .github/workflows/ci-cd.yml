@@ -1,0 +1,38 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build Backend Image
+      run: |
+        docker build -t hammadqamar913@gmail.com/devops-backend ./backend
+
+    - name: Build Frontend Image
+      run: |
+        docker build -t hammadqamar913@gmail.com/devops-frontend ./frontend
+
+    - name: Push Backend Image
+      run: |
+        docker push hammadqamar913@gmail.com/devops-backend
+
+    - name: Push Frontend Image
+      run: |
+        docker push hammadqamar913@gmail.com/devops-frontend
