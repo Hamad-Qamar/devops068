@@ -23,11 +23,11 @@ jobs:
 
     - name: Build Backend Image
       run: |
-        docker build -t hamadqamar/devops-backend ./backend
+        docker build -t hamadqamar/devops-backend ./Backend
 
     - name: Build Frontend Image
       run: |
-        docker build -t hamadqamar/devops-frontend ./frontend
+        docker build -t hamadqamar/devops-frontend ./Frontend
 
     - name: Push Backend Image
       run: |
