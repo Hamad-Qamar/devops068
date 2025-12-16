@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        ul {
+            margin-top: 15px;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            background: #f1f1f1;
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Student Management by Hamad Qamar</h2>
+
+        <input id="name" placeholder="Student Name">
+        <input id="reg" placeholder="Registration No">
+        <input id="dept" placeholder="Department">
+
+        <button onclick="addStudent()">Add Student</button>
+
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        const API = "http://localhost:5000/students";
+
+        function addStudent() {
+            fetch(API, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: name.value,
+                    regNo: reg.value,
+                    department: dept.value
+                })
+            }).then(loadStudents);
+        }
+
+        function loadStudents() {
+            fetch(API)
+                .then(res => res.json())
+                .then(data => {
+                    list.innerHTML = "";
+                    data.forEach(s => {
+                        list.innerHTML += `<li>${s.name} | ${s.regNo} | ${s.department}</li>`;
+                    });
+                });
+        }
+
+        loadStudents();
+    </script>
+</body>
+
+</html>
